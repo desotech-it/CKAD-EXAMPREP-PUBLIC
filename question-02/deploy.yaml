@@ -22,4 +22,4 @@ spec:
         - sh
         - -c
         - while : ; do kubectl get deployments.app ; sleep 3 ; done
-      servicaAccountName: default
+      serviceAccountName: default
