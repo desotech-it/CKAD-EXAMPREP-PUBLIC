@@ -20,4 +20,4 @@ spec:
         image: r.deso.tech/dockerhub/bitnami/kubectl:1.24
         ports:
         - containerPort: 80
-      servicaAccountName: default
+      serviceAccountName: default
