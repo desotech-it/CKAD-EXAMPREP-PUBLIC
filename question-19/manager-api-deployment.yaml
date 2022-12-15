@@ -19,4 +19,4 @@ spec:
       - name: manager-container
         image: r.deso.tech/dockerhub/library/nginx:stable
         ports:
-          containerPort: 80
+        - containerPort: 80
