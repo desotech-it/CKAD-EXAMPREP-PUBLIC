@@ -11,4 +11,4 @@ spec:
     image: r.deso.tech/dockerhub/nicolaka/netshoot
     command:
     - sleep
-    - 100000000
+    - '100000000'
