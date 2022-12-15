@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sausage-shop-005
+  labels:
+    app: shop
+  namespace: question-25
+spec:
+  containers:
+  - name: shop
+    image: r.deso.tech/dockerhub/library/nginx:1
+    ports:
+    - containerPort: 80

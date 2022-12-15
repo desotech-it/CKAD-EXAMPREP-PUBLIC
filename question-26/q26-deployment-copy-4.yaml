@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: kubectl edit new version -- upgrade cpu limit
+  name: deploy-q26
+  namespace: question-26
+  labels:
+    app: donut
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: donut
+  template:
+    metadata:
+      labels:
+        app: donut
+    spec:
+      containers:
+      - name: kubectl
+        image: r.deso.tech/dockerhub/library/httpda:latest
