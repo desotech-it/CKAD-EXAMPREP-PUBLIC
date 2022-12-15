@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: espresso-pod
+  labels:
+    drink: espresso
+  namespace: question-10
+spec:
+  containers:
+  - name: espresso
+    image: r.deso.tech/dockerhub/library/httpd:2
+    ports:
+    - containerPort: 80
