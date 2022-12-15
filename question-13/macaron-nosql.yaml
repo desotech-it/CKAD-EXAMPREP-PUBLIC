@@ -4,17 +4,17 @@ metadata:
   name: macaron-nosql
   namespace: question-13
   labels:
-    app: donut
+    app: macaron
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
-      app: donut
+      app: macaron
   template:
     metadata:
       labels:
-        app: donut
+        app: macaron
     spec:
       containers:
-      - name: kubectl
+      - name: macaron
         image: r.deso.tech/whoami/whoami:latest
