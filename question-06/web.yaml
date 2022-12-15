@@ -1,19 +1,19 @@
 apiVersion: betav1applicationcontroller/v1
 kind: Deployment
 metadata:
-  name: sofa-deployment
+  name: web-deployment
   namespace: question-02
   labels:
-    app: sofa
+    app: web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sofa
+      app: web
   template:
     metadata:
       labels:
-        app: sofa
+        app: web
     spec:
       containers:
       - name: whoami
