@@ -18,5 +18,5 @@ spec:
       containers:
       - name: pasta
         image: r.deso.tech/whoami/whoami:latest
-      ports:
-      - containerPort: 80
+        ports:
+        - containerPort: 80
