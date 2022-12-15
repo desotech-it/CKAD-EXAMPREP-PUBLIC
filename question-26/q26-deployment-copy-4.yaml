@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: kubectl
-        image: r.deso.tech/dockerhub/library/httpda:latest
+        image: r.deso.tech/dockerhub/library/httpdf:latest
