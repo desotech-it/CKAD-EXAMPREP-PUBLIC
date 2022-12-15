@@ -7,9 +7,6 @@ metadata:
     app: web
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: web
   template:
     metadata:
       labels:
