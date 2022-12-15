@@ -9,3 +9,6 @@ spec:
   containers:
   - name: cafe
     image: r.deso.tech/dockerhub/nicolaka/netshoot
+    command:
+    - sleep
+    - 100000000
