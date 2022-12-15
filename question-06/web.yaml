@@ -2,7 +2,7 @@ apiVersion: betav1applicationcontroller/v1
 kind: Deployment
 metadata:
   name: web-deployment
-  namespace: question-02
+  namespace: question-06
   labels:
     app: web
 spec:

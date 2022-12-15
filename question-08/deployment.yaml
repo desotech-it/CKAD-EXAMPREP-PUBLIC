@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pizza-app
+  namespace: question-08
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pizza
+  template:
+    metadata:
+      labels:
+        app: pizza
+    spec:
+      containers:
+      - image: r.deso.tech/whoami/whoami:0.4.1
+        name: whoami

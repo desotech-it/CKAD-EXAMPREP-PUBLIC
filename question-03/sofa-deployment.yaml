@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sofa-deployment
-  namespace: question-02
+  namespace: question-03
   labels:
     app: sofa
 spec:
