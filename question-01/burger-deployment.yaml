@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burger-deployment
+  labels:
+    app: burger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: burger
+  template:
+    metadata:
+      labels:
+        app: burger
+    spec:
+      containers:
+      - name: whoami
+        image: r.deso.tech/whoami/whoami:0.4
+        ports:
+        - containerPort: 8085
