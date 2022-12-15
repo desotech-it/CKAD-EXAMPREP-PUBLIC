@@ -1,0 +1,22 @@
+apiVersion: betav1applicationcontroller/v1
+kind: Deployment
+metadata:
+  name: sofa-deployment
+  namespace: question-02
+  labels:
+    app: sofa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sofa
+  template:
+    metadata:
+      labels:
+        app: sofa
+    spec:
+      containers:
+      - name: whoami
+        image: r.deso.tech/whoami/whoami:0.4
+        ports:
+        - containerPort: 80

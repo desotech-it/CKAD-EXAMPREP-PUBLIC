@@ -18,6 +18,8 @@ spec:
       containers:
       - name: kubectl
         image: r.deso.tech/dockerhub/bitnami/kubectl:1.24
-        ports:
-        - containerPort: 80
-      serviceAccountName: default
+        command:
+        - sh
+        - -c
+        - while : ; do kubectl get deployments.app ; sleep 3 ; done
+      servicaAccountName: default
