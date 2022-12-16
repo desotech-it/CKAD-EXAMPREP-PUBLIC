@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: whoami
-        image: r.deso.tech/whoami/whoami:0.4
+        image: r.deso.tech/whoami/whoami:0.4.3
         ports:
         - containerPort: 8085
