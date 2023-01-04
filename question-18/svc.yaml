@@ -4,7 +4,7 @@ metadata:
   labels:
     app: manager-api-svc
   name: manager-api-svc
-  namespace: question-19
+  namespace: question-18
 spec:
   ports:
   - port: 4444

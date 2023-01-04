@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sausage-shop-004
-  annotations:
-    description: this is the server for the E-Commerce System Sausage-shop
+  name: sausage-shop-005
   labels:
     app: shop
-  namespace: question-25
+  namespace: question-24
 spec:
   containers:
   - name: shop

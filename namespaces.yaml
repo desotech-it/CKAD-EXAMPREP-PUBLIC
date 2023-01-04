@@ -137,18 +137,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: question-27
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: question-28
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: question-29
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: question-30

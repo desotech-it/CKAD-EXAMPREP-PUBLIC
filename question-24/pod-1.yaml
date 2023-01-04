@@ -4,7 +4,7 @@ metadata:
   name: sausage-shop-001
   labels:
     app: shop
-  namespace: question-25
+  namespace: question-24
 spec:
   containers:
   - name: shop

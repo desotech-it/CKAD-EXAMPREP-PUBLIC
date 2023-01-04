@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: kubectl edit new version -- upgrade 
-  name: deploy-q26
-  namespace: question-26
+    kubernetes.io/change-cause: original
+  name: deploy-q25
+  namespace: question-25
   labels:
     app: donut
 spec:
@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: kubectl
-        image: r.deso.tech/dockerhub/library/httpd:latest
+        image: r.deso.tech/dockerhub/library/httpda:latest

@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-q26
-  namespace: question-26
+  name: deploy-q25
+  namespace: question-25
   labels:
     app: donut
 spec:

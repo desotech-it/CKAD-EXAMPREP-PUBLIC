@@ -2,4 +2,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: foo-app-saccount
-  namespace: question-17
+  namespace: question-16

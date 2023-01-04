@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   annotations:
     kubernetes.io/change-cause: kubectl edit new version -- upgrade cpu limit
-  name: deploy-q26
-  namespace: question-26
+  name: deploy-q25
+  namespace: question-25
   labels:
     app: donut
 spec:
