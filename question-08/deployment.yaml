@@ -14,5 +14,5 @@ spec:
         app: pizza
     spec:
       containers:
-      - image: r.deso.tech/whoami/whoami:0.4.1
+      - image: r.deso.tech/whoami/whoami:0.4.0
         name: whoami
