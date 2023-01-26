@@ -126,7 +126,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: question-25b
+  name: question-24b
 ---
 apiVersion: v1
 kind: Namespace
