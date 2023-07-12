@@ -19,4 +19,4 @@ spec:
       - name: whoami
         image: r.deso.tech/whoami/whoami:0.4.3
         ports:
-        - containerPort: 8085
+        - containerPort: 80
