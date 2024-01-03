@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: question-22-sa-v2-secret
-  namespace: question-22
-  annotations:
-    kubernetes.io/service-account.name: question-22-sa-v2
-type: kubernetes.io/service-account-token
