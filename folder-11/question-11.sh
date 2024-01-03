@@ -6,6 +6,9 @@ export folder=folder-11
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -29,7 +32,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: donut-deployment
-  namespace: question-11
+  namespace: chicago
   labels:
     app: donut
 spec:
@@ -48,14 +51,14 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/donut-deployment.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/donut-deployment.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/donut-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: donut-service
-  namespace: question-11
+  namespace: chicago
 spec:
   type: ClusterIP
   selector:
@@ -66,4 +69,4 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/donut-service.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/donut-service.yaml

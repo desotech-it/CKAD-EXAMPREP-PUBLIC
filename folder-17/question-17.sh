@@ -6,6 +6,9 @@ export folder=folder-17
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -22,6 +25,7 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-17/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create ns security >> $LOGFILE 2>&1
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/secret-2.yaml
 apiVersion: v1
@@ -32,11 +36,8 @@ kind: Secret
 metadata:
   creationTimestamp: null
   name: secret-2
-  namespace: question-17
+  namespace: security
 EOF
-
-kubectl apply -f $location/$folder/secret-2.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/secret-handler.yaml
 apiVersion: v1
@@ -48,7 +49,7 @@ metadata:
     red_ident: 9cf7a7c0-fdb2-4c35-9c13-c2a0bb52b4a9
     type: automatic
   name: secret-handler
-  namespace: question-17
+  namespace: security
 spec:
   volumes:
   - name: cache-volume1
@@ -77,5 +78,4 @@ spec:
       value: "-7PA0_Z]>{pwa43r)__"
 EOF
 
-kubectl apply -f $location/$folder/secret-handler.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+kubectl apply -f $location/$folder/secret-handler.yaml >> $LOGFILE 2>&1

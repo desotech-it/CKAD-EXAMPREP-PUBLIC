@@ -6,6 +6,9 @@ export folder=folder-03
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -32,15 +35,22 @@ metadata:
   namespace: couch
   labels:
     app: sofa
+    project: sleeping-well
+    ns: couch
+    exam: ckad
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: sofa
+      ns: couch
   template:
     metadata:
       labels:
         app: sofa
+        project: sleeping-well
+        ns: couch
+        exam: ckad
     spec:
       containers:
       - name: whoami
@@ -50,6 +60,6 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/sofa-deployment.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sofa-deployment.yaml
 
 rm $location/$folder/sofa-deployment.yaml

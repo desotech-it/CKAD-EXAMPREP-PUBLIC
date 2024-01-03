@@ -6,6 +6,9 @@ export folder=folder-06
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -29,15 +32,19 @@ apiVersion: betav1applicationcontroller/v1
 kind: Deployment
 metadata:
   name: web-deployment
-  namespace: question-06
+  namespace: version
   labels:
     app: web
+    version: 1.15
+    update: false
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: web
+        version: 1.15
+        update: false
     spec:
       containers:
       - name: whoami
@@ -47,4 +54,3 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/web-deployment.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml

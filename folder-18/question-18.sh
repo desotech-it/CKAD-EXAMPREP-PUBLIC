@@ -6,6 +6,9 @@ export folder=folder-18
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -22,13 +25,14 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-18/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create ns api-ns-prod >> $LOGFILE 2>&1
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/manager-api-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: manager-api-deployment
-  namespace: question-18
+  namespace: api-ns-prod
   labels:
     app: manager-api-deployment
 spec:
@@ -49,7 +53,7 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/manager-api-deployment.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/manager-api-deployment.yaml 
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/manager-api-svc.yaml
 apiVersion: v1
@@ -58,7 +62,7 @@ metadata:
   labels:
     app: manager-api-svc
   name: manager-api-svc
-  namespace: question-18
+  namespace: api-ns-prod
 spec:
   ports:
   - port: 4444
@@ -71,4 +75,4 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/manager-api-svc.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/manager-api-svc.yaml

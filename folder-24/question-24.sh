@@ -6,6 +6,9 @@ export folder=folder-24
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -30,7 +33,7 @@ metadata:
   name: sausage-shop-001
   labels:
     app: shop
-  namespace: question-24
+  namespace: living-room
 spec:
   containers:
   - name: shop
@@ -40,7 +43,7 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/sausage-shop-001.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sausage-shop-001.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-002.yaml
 apiVersion: v1
@@ -49,7 +52,7 @@ metadata:
   name: sausage-shop-002
   labels:
     app: shop
-  namespace: question-24
+  namespace: living-room
 spec:
   containers:
   - name: shop
@@ -59,7 +62,7 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/sausage-shop-002.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sausage-shop-002.yaml
 
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-003.yaml
@@ -69,7 +72,7 @@ metadata:
   name: sausage-shop-003
   labels:
     app: shop
-  namespace: question-24
+  namespace: living-room
 spec:
   containers:
   - name: shop
@@ -80,7 +83,7 @@ EOF
 
 
 kubectl apply -f $location/$folder/sausage-shop-003.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sausage-shop-003.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-004.yaml
 apiVersion: v1
@@ -91,7 +94,7 @@ metadata:
     description: this is the server for the E-Commerce System Sausage-shop
   labels:
     app: shop
-  namespace: question-24
+  namespace: living-room
 spec:
   containers:
   - name: shop
@@ -102,7 +105,7 @@ EOF
 
 
 kubectl apply -f $location/$folder/sausage-shop-004.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sausage-shop-004.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-005.yaml
 apiVersion: v1
@@ -111,7 +114,7 @@ metadata:
   name: sausage-shop-005
   labels:
     app: shop
-  namespace: question-24
+  namespace: living-room
 spec:
   containers:
   - name: shop
@@ -121,4 +124,43 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/sausage-shop-005.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/sausage-shop-005.yaml
+
+
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-006.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sausage-shop-006
+  labels:
+    app: shop
+  namespace: living-room
+spec:
+  containers:
+  - name: shop
+    image: r.deso.tech/dockerhub/library/nginx:1
+    ports:
+    - containerPort: 80
+EOF
+
+kubectl apply -f $location/$folder/sausage-shop-006.yaml >> $LOGFILE 2>&1 
+rm -f $folder/sausage-shop-006.yaml
+
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-007.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sausage-shop-007
+  labels:
+    app: shop
+  namespace: living-room
+spec:
+  containers:
+  - name: shop
+    image: r.deso.tech/dockerhub/library/nginx:1
+    ports:
+    - containerPort: 80
+EOF
+
+kubectl apply -f $location/$folder/sausage-shop-007.yaml >> $LOGFILE 2>&1 
+rm -f $folder/sausage-shop-007.yaml

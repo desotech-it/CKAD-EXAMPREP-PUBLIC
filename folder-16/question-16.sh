@@ -6,6 +6,9 @@ export folder=folder-16
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
+.$location/cleanup.sh >> $LOGFILE 2>&1
+#for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
+
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
 kind: Cluster
 name: $question
@@ -28,7 +31,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: foo-app-role
-  namespace: question-16
+  namespace: bar
 rules:
 - apiGroups:
   - apps
@@ -41,27 +44,31 @@ rules:
 EOF
 
 kubectl apply -f $location/$folder/foo-app-role.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/foo-app-role.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app-saccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: foo-app-saccount
-  namespace: question-16
+  namespace: default
 EOF
 
 kubectl apply -f $location/$folder/foo-app-saccount.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/foo-app-saccount.yaml
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: foo-app
-  namespace: question-02
+  namespace: bar
   labels:
     app: foo
+    ns: bar
+    env: ckad
+    end: never
+    project: kubectl
 spec:
   replicas: 1
   selector:
@@ -71,6 +78,10 @@ spec:
     metadata:
       labels:
         app: foo
+        ns: bar
+        env: ckad
+        end: never
+        project: kubectl
     spec:
       containers:
       - name: foo-c01
@@ -82,14 +93,14 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/foo-app.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/rb-foo.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: rb-foo
-  namespace: question-16
+  namespace: bar
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -97,8 +108,8 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: foo-app-saccount
-  namespace: question-16
+  namespace: default
 EOF
 
 kubectl apply -f $location/$folder/rb-foo.yaml >> $LOGFILE 2>&1 
-rm -f $folder/*.yaml
+rm -f $folder/rb-foo.yaml
