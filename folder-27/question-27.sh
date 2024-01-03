@@ -6,7 +6,7 @@ export folder=folder-27
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
-cleanup.sh >> $LOGFILE 2>&1
+./cleanup.sh >> $LOGFILE 2>&1
 #for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
 
 cat <<EOF | kind create cluster  --image kindest/node:v1.29.0@sha256:eaa1450915475849a73a9227b8f201df25e55e268e5d619312131292e324d570  --config - > /dev/null 2>&1
