@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-21
-
+export folder=folder-21
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 

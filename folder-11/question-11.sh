@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-11
-
+export folder=folder-11
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +24,7 @@ kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/donut-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/donut-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,9 +47,10 @@ spec:
         image: r.deso.tech/whoami/whoami:latest
 EOF
 
-kubectl apply -f $location/$question/donut-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/donut-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/donut-service.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/donut-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -64,4 +65,5 @@ spec:
     targetPort: 80
 EOF
 
-kubectl apply -f $location/$question/donut-service.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/donut-service.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

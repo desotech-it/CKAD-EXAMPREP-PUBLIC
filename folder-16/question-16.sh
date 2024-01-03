@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-16
-
-
+export folder=folder-16
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-16/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/foo-app-role.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -41,9 +40,10 @@ rules:
   - list
 EOF
 
-kubectl apply -f $location/$question/foo-app-role.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/foo-app-role.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/foo-app-saccount.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app-saccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -51,9 +51,10 @@ metadata:
   namespace: question-16
 EOF
 
-kubectl apply -f $location/$question/foo-app-saccount.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/foo-app-saccount.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/foo-app.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -80,9 +81,10 @@ spec:
         - 'while : ; do kubectl get deployments.app ; sleep 3 ; done'
 EOF
 
-kubectl apply -f $location/$question/foo-app.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/foo-app.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/rb-foo.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/rb-foo.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -98,4 +100,5 @@ subjects:
   namespace: question-16
 EOF
 
-kubectl apply -f $location/$question/rb-foo.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/rb-foo.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

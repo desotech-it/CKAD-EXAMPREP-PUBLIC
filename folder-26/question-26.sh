@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-26
-
+export folder=folder-26
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -23,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-26/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/mickey-api.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/mickey-api.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -58,4 +58,5 @@ spec:
 EOF
 
 
-kubectl apply -f $location/$question/mickey-api.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/mickey-api.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

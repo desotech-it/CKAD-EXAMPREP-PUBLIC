@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-17
-
-
+export folder=folder-17
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-17/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/secret-2.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/secret-2.yaml
 apiVersion: v1
 data:
   pass: cGFzc3dvcmQK
@@ -36,9 +35,10 @@ metadata:
   namespace: question-17
 EOF
 
-kubectl apply -f $location/$question/secret-2.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/secret-2.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/secret-handler.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/secret-handler.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -77,4 +77,5 @@ spec:
       value: "-7PA0_Z]>{pwa43r)__"
 EOF
 
-kubectl apply -f $location/$question/secret-handler.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/secret-handler.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

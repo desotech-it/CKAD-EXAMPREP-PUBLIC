@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-18
-
-
+export folder=folder-18
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-18/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/manager-api-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/manager-api-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,9 +48,10 @@ spec:
         - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/manager-api-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/manager-api-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/manager-api-svc.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/manager-api-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -70,4 +70,5 @@ spec:
   type: ClusterIP
 EOF
 
-kubectl apply -f $location/$question/manager-api-svc.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/manager-api-svc.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

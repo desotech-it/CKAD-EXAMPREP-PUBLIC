@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-24
-
+export folder=folder-24
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -23,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-24/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sausage-shop-001.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-001.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -39,9 +39,10 @@ spec:
     - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/sausage-shop-001.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sausage-shop-001.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sausage-shop-002.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-002.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -57,10 +58,11 @@ spec:
     - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/sausage-shop-002.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sausage-shop-002.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sausage-shop-003.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-003.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -77,9 +79,10 @@ spec:
 EOF
 
 
-kubectl apply -f $location/$question/sausage-shop-003.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sausage-shop-003.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sausage-shop-004.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-004.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -98,9 +101,10 @@ spec:
 EOF
 
 
-kubectl apply -f $location/$question/sausage-shop-004.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sausage-shop-004.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sausage-shop-005.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-005.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -116,4 +120,5 @@ spec:
     - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/sausage-shop-005.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sausage-shop-005.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-13
-
-
+export folder=folder-13
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-13/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/macaron-nosql.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/macaron-nosql.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,4 +46,5 @@ spec:
         image: r.deso.tech/whoami/whoami:latest
 EOF
 
-kubectl apply -f $location/$question/macaron-nosql.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/macaron-nosql.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

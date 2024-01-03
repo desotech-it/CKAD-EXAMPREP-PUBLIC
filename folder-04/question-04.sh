@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-04
-
+export folder=folder-04
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -22,4 +22,3 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-04/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
-kubectl create ns development >> $LOGFILE 2>&1

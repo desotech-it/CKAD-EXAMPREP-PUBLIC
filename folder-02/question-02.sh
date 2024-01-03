@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-02
-
+export folder=folder-02
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +24,7 @@ kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 kubectl create ns bakery >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/pizza-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/pizza-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,9 +52,10 @@ spec:
       serviceAccountName: default
 EOF
 
-kubectl apply -f $location/$question/pizza-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/pizza-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/pizza-role.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/pizza-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -71,9 +72,10 @@ rules:
   - list
 EOF
 
-kubectl apply -f $location/$question/pizza-role.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/pizza-role.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/pizza-rolebinding.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/pizza-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -89,9 +91,10 @@ subjects:
   namespace: bakery
 EOF
 
-kubectl apply -f $location/$question/pizza-rolebinding.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/pizza-rolebinding.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/pizza-serviceaccount.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/pizza-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -99,8 +102,9 @@ metadata:
   namespace: bakery
 EOF
 
-kubectl apply -f $location/$question/pizza-serviceaccount.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/pizza-serviceaccount.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-rm $location/$question/pizza-role.yaml
-rm $location/$question/pizza-rolebinding.yaml
-rm $location/$question/pizza-serviceaccount.yaml
+rm $location/$folder/pizza-role.yaml
+rm $location/$folder/pizza-rolebinding.yaml
+rm $location/$folder/pizza-serviceaccount.yaml

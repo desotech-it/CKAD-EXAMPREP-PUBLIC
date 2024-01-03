@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-03
-
+export folder=folder-03
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +24,7 @@ kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 kubectl create ns couch >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/sofa-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sofa-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,6 +49,7 @@ spec:
         - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/sofa-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/sofa-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-rm $location/$question/sofa-deployment.yaml
+rm $location/$folder/sofa-deployment.yaml

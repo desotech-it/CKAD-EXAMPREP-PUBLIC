@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-15
-
-
+export folder=folder-15
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-15/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/spaghetti-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/spaghetti-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,9 +48,10 @@ spec:
         - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/spaghetti-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/spaghetti-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/spaghetti-service.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/spaghetti-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -66,4 +66,5 @@ spec:
     targetPort: 80
 EOF
 
-kubectl apply -f $location/$question/spaghetti-service.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/spaghetti-service.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

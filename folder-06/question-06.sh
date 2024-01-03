@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-06
-
+export folder=folder-06
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +24,7 @@ kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/web-deployment.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/web-deployment.yaml
 apiVersion: betav1applicationcontroller/v1
 kind: Deployment
 metadata:
@@ -46,4 +46,5 @@ spec:
         - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/web-deployment.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/web-deployment.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

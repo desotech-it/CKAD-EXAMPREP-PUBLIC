@@ -2,7 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-10
-
+export folder=folder-10
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +24,7 @@ kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/cafe-newpod.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/cafe-newpod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -41,9 +41,10 @@ spec:
     - '100000000'
 EOF
 
-kubectl apply -f $location/$question/cafe-newpod.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/cafe-newpod.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/cappuccino-pod.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/cappuccino-pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -59,9 +60,10 @@ spec:
     - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/cappuccino-pod.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/cappuccino-pod.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/espresso-pod.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/espresso-pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -77,9 +79,9 @@ spec:
     - containerPort: 80
 EOF
 
-kubectl apply -f $location/$question/espresso-pod >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/espresso-pod >> $LOGFILE 2>&1 
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/cafe-networkpolicy.yaml
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/cafe-networkpolicy.yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -121,4 +123,5 @@ spec:
               drink: cappuccino
 EOF
 
-kubectl apply -f $location/$question/cafe-networkpolicy.yaml >> $LOGFILE 2>&1 
+kubectl apply -f $location/$folder/cafe-networkpolicy.yaml >> $LOGFILE 2>&1 
+rm -f $folder/*.yaml

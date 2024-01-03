@@ -2,8 +2,7 @@
 
 export location=/home/student/CKAD-material
 export question=question-14
-
-
+export folder=folder-14
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
@@ -24,7 +23,7 @@ sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-14/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
 
-cat >> $LOGFILE 2>&1  <<EOF >>$location/$question/Dockerfile
+cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/Docker-file01
 FROM r.deso.tech/dockerhub/library/alpine:3.13.5
 
 # Here we  set Rome time zone locale as default.
