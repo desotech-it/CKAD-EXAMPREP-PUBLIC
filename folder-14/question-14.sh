@@ -6,7 +6,7 @@ export folder=folder-14
 export LOGFILE=$question.log
 touch $LOGFILE >> $LOGFILE 2>&1
 
-.$location/cleanup.sh >> $LOGFILE 2>&1
+cleanup.sh >> $LOGFILE 2>&1
 #for q in {01..27} ; do rm folder-"$q"/*.yaml ; done >> $LOGFILE 2>&1
 
 
