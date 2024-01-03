@@ -25,6 +25,8 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-25/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create namespace production-new-release  >> $LOGFILE 2>&1
+
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/deploy-q25-copy-0.yaml
 apiVersion: apps/v1

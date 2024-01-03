@@ -25,6 +25,9 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-24/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create namespace living-room  >> $LOGFILE 2>&1
+
+
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/sausage-shop-001.yaml
 apiVersion: v1

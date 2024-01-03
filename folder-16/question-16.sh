@@ -25,6 +25,8 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-16/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create namespace bar  >> $LOGFILE 2>&1
+
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/foo-app-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1

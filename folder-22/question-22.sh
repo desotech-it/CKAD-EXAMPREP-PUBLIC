@@ -25,6 +25,9 @@ EOF
 sed -i '/^\s*name:/s/\(name:\s*\).*/\1question-22/' /home/student/.kube/config
 kubectl config use-context $question  >> $LOGFILE 2>&1
 kubectl config set-context --current --cluster $question --user kind-$question  >> $LOGFILE 2>&1
+kubectl create namespace solar  >> $LOGFILE 2>&1
+
+
 
 cat >> $LOGFILE 2>&1  <<EOF >>$location/$folder/question-22-sa-v2.yaml
 apiVersion: v1
