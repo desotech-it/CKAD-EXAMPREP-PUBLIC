@@ -52,5 +52,3 @@ spec:
         ports:
         - containerPort: 80
 EOF
-
-kubectl apply -f $location/$folder/web-deployment.yaml >> $LOGFILE 2>&1 
