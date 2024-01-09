@@ -60,6 +60,5 @@ spec:
 EOF
 
 kubectl apply -f $location/$folder/sofa-deployment.yaml >> $LOGFILE 2>&1 
-rm -f $folder/sofa-deployment.yaml
 
 rm $location/$folder/sofa-deployment.yaml
